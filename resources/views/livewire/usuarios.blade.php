@@ -5,7 +5,7 @@
                 <div class="card-header">Bienvenido a Usuarios</div>
 
                 <div class="card-body">
-                 <h3>Aqui va la informacion xD</h3>
+                 <h3>Aqui va la informacion de Usuarios de crud liewire</h3>
                    
                 </div>
             </div>
