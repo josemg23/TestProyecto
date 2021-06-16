@@ -225,6 +225,12 @@
        <!-- Custom JS File -->
     <script src="{{ asset('aegis/source/light/assets/js/custom.js') }}"></script>
       @livewireScripts
+
+      <script type="text/javascript">
+        window.livewire.on('postStore', () => {
+            $('#exampleModal').modal('hide');
+        });
+    </script>
 </body>
 
 </html>
