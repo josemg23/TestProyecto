@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="card">
+           
                 <div class="card-body p-0">
 
 
@@ -45,13 +45,13 @@
                     </div>
 
                     <div class="table-responsive">
-
-                        <table class="table table-hover ">
-                            <thead class="thead-dark">
+                        <table class="table table-hover">
+                            <thead >
                                 <tr class="">
                                     <th class="px-4 py-2 text-center ">ID</th>
                                     <th class="px-4 py-2 text-center ">Titulo</th>
                                     <th class="px-4 py-2 text-center ">Resumen</th>
+                                    <th class="px-4 py-2 text-center ">Creador</th>
                                     <th class="px-4 py-2 text-center ">Estado</th>
                                     <th class="px-4 py-2 text-center " colspan="2">Accion</th>
                                 </tr>
@@ -60,10 +60,11 @@
                                 @if ($data->isNotEmpty())
                                     @foreach ($data as $c)
                                         <tr>
-                                            <td >{{ $c->id }}</td>
-                                            <td >{{ $c->titulo }}</td>
-                                            <td >{{ $c->resumen }}</td>
-                                            <td>
+                                            <td class="text-center " >{{ $c->id }}</td>
+                                            <td class="text-center ">{{ $c->titulo }}</td>
+                                            <td class="text-center ">{{ $c->resumen }}</td>
+                                            <td class="text-center ">{{ $c->user }}</td>
+                                            <td class="text-center ">
                                                 <span style="cursor: pointer;"
                                                     wire:click.prevent="estadochange('{{ $c->id }}')"
                                                     class="badge @if ($c->estado == 'activo') badge-success
@@ -107,7 +108,7 @@
                     {!! $data->links() !!}
 
                 </div>
-            </div>
+          
         </div>
     </div>
 

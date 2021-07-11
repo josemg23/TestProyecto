@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-   <h4>Control de Permisos</h4>
+
+<h1 class="text-center font-weight-bold">Administración de Roles</h1>
+<br>
 @endsection

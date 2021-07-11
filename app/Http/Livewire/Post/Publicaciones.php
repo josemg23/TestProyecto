@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Post;
 
 use App\Post;
+use App\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Publicaciones extends Component
 {
@@ -25,17 +27,28 @@ class Publicaciones extends Component
     public $createMode = false;
     public $filter     = '';
 
-    public $titulo, $resumen;
+    public $titulo, $resumen, $user_id='';
 
  
 
 
     public function render()
     {
-        $data = Post::where(function($query){
-            $query->where('posts.titulo', 'like','%'. $this->search . '%');
-        })->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-          ->paginate($this->perPage);
+        $this->users= User::all();
+        // $data = Post::where(function($query){
+        //     $query->where('posts.titulo', 'like','%'. $this->search . '%');
+        // })->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+        //   ->paginate($this->perPage); para obtener datos de una misma tabla
+
+        $data = Post::join('users', 'users.id' ,'=', 'posts.user_id')
+                ->where(function($query){
+                $query->where('posts.titulo', 'like', '%' .$this->search.'%');
+                })
+                ->where(fn($query) =>$this->filter ? $query->where('users.name', $this->filter) : '')
+                ->select('posts.*', 'users.name as user') 
+                ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+
         return view('livewire.post.publicaciones', compact('data'));
     }
 
@@ -63,6 +76,7 @@ class Publicaciones extends Component
 
         $p = new Post;
         $p->titulo   = $this->titulo;
+        $p->user_id  = Auth::id();
         $p->resumen  = $this->resumen;
         $p->estado   = $this->estado == 'activo' ? 'activo' : 'inactivo';
         $p->save();
