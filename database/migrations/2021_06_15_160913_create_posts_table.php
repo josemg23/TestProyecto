@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->string('resumen');
+            $table->enum('estado',['activo','inactivo'])->nullable();
             $table->timestamps();
         });
     }

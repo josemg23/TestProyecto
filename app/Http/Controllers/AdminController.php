@@ -15,4 +15,14 @@ class AdminController extends Controller
     {
         return view('cruds.utilidades.indice');
     }
+
+    public function index3()
+    {
+        return view('admin.roles.index');
+    }
+
+    public function index4()
+    {
+        return view('admin.usuarios.index');
+    }
 }

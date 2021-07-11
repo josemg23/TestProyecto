@@ -15,6 +15,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
+        "laravolt/avatar": "^4.1",
         "livewire/livewire": "^2.4",
         "spatie/laravel-permission": "^4.2"
     },

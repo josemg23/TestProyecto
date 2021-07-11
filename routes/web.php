@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Actividades;
+
 
 
 /*
@@ -22,9 +22,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/post-online', 'AdminController@index')->name('Post');
 
-Route::get('/actividades-online', 'AdminController@index2')->name('Actividades');
-Route::resource('users','UserController');
 
 

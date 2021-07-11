@@ -11,8 +11,8 @@ use Spatie\Permission\Traits\HasRoles; // se usa para utilizar los archivos de v
 class User extends Authenticatable
 {
     
-    use Notifiable;
-    use HasRoles;// para usar los roles con el spaty 
+    use Notifiable,HasRoles ;
+    // para usar los roles con el spaty 
 
     /**
      * The attributes that are mass assignable.

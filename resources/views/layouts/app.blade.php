@@ -8,12 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Permisos y Roles</title>
     <!-- General CSS Files -->
-    
+
     <link rel="stylesheet" href=" {{ asset('aegis/source/light/assets/css/app.min.css') }}">
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/css/custom.css') }}">
-  
+    <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/bundles/izitoast/css/iziToast.min.css') }}">
+   
     <!-- Template CSS -->
     <link rel='shortcut icon' type='image/x-icon' href='aegis/source/light/assets/img/favicon.ico'>
 
@@ -31,90 +32,89 @@
                 <div class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
-                        <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                                <i data-feather="maximize"></i>
-                            </a></li>
-                        <li>
-                            <form class="form-inline mr-auto">
-                                <div class="search-element">
-                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                                        data-width="200">
-                                    <button class="btn" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </form>
+                        collapse-btn"> <i data-feather="align-justify"></i></a></li>
+                        <form class="form-inline mr-auto">
+                        </form>
                         </li>
                     </ul>
                 </div>
                 <ul class="navbar-nav navbar-right">
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
                     @else
-                    <li class="dropdown"><a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image"
-                                src="aegis/source/light/assets/img/user.png" class="user-img-radious-style"> <span
-                                class="d-sm-none d-lg-inline-block"></span></a>
-                        <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">Hello {{ Auth::user()->name }}</div>
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"> <i
-                                    class="fas fa-sign-out-alt"></i>
-                                {{ __('Logout') }}
+                        <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <i data-feather="settings"></i>
+                                <span class="d-sm-none d-lg-inline-block"></span>
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                            <div class="dropdown-menu dropdown-menu-right pullDown">
+                                <div class="dropdown-title"> {{ Auth::user()->name }}</div>
+                                <div class="dropdown-divider">{{ Auth::user()->roles[0]->name }}</div>
+                                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();"> <i
+                                        class="fas fa-sign-out-alt"></i>
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     @endguest
                 </ul>
             </nav>
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}"> <img alt="image" src="aegis/source/light/assets/img/logo.png" class="header-logo">
-                            <span class="logo-name">RP&Livewire</span>
+                        <a href="{{ url('/') }}"> <img alt="image"
+                                src="{{ asset('aegis/source/light/assets/img/logo.png') }}" class="header-logo">
+                            <span class="logo-name">Ripzer</span>
                         </a>
                     </div>
                     <div class="sidebar-user">
                         <div class="sidebar-user-picture">
-                            <img alt="image" src="aegis/source/light/assets/img/user-5.png">
+                            @if (Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" class="img-fluid mr-2" alt="avatar">
+                            @else
+                                <img alt="image" src="{{ Avatar::create(Auth::user()->name)->setChars(2) }}">
+                            @endif
+
                         </div>
                         <div class="sidebar-user-details">
                             <div class="user-name"> {{ Auth::user()->name }}</div>
-                            <div class="user-role">Administrator</div>
+                            <div class="user-role">{{ Auth::user()->roles[0]->name }}</div>
                         </div>
-                    </div>
-                    <ul class="sidebar-menu">
-                        <li class="menu-header">Menu</li>
-                        <li class="dropdown active">
-                            <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>Administración
-                                </span></a>
-                            <ul class="dropdown-menu">
-                            <li class="active"><a class="nav-link" href="{{ url('/home') }}">Inicio</a></li>
-                            <li class="active"><a class="nav-link" href="{{ url('/users') }}">Usuarios</a></li>
-                                <li class="active"><a class="nav-link" href="{{ url('/post-online') }}">Post</a></li>
-                                <li><a class="nav-link" href="{{ url('/productos') }}">Productos</a></li>
-                               
-                            </ul>
-                        </li>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Menu</li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link has-dropdown"><i
+                                        data-feather="monitor"></i><span>Administración
+                                    </span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="active"><a class="nav-link" href="{{ url('/admin/control-permisos') }}">Control de Permisos</a></li>
+                                    <li class="active"><a class="nav-link"
+                                            href="{{ url('/admin/lista-usuarios') }}">Lista de Usuarios</a></li>
+                                    <li class="active"><a class="nav-link"
+                                            href="{{ url('/admin/post-online') }}">Post</a></li>
+                                    <li><a class="nav-link" href="{{ url('/productos') }}">Productos</a></li>
 
-                        <li class="dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i
-                                    data-feather="command"></i><span>Utilidades</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/actividades-online') }}">Actividades</a></li>
-                                <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
-                                <li><a class="nav-link" href="blog.html">Blog</a></li>
-                                <li><a class="nav-link" href="calendar.html">Calendar</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="nav-link has-dropdown"><i
+                                        data-feather="command"></i><span>Perfil</span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link"
+                                            href="{{ url('/admin/actividades-online') }}">Actividades</a></li>
+                                    <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                                    <li><a class="nav-link" href="blog.html">Blog</a></li>
+                                    <li><a class="nav-link" href="calendar.html">Calendar</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                 </aside>
             </div>
             <!-- Main Content -->
@@ -122,7 +122,7 @@
 
                 @yield('content')
 
-                <div class="settingSidebar">
+                {{-- <div class="settingSidebar">
                     <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
                     </a>
                     <div class="settingSidebar-body ps-container ps-theme-default">
@@ -207,30 +207,30 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
-            <!-- <footer class="main-footer">
+            <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2019 <div class="bullet"></div> Design By <a href="#">Redstar</a>
                 </div>
                 <div class="footer-right">
                 </div>
-            </footer> -->
+            </footer>
         </div>
     </div>
     <!-- General JS Scripts -->
     <script src="{{ asset('aegis/source/light/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('aegis/source/light/assets/js/scripts.js') }}"></script>
-    <!-- Page Specific JS File -->
-       <!-- Custom JS File -->
+        @livewireScripts
+    <!-- Evento de Modales -->
+    <script src="{{ asset('js/eventos.js') }}"></script>
+    <!-- Custom JS File -->
     <script src="{{ asset('aegis/source/light/assets/js/custom.js') }}"></script>
-      @livewireScripts
+    <script src="{{ asset('aegis/source/light/assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
 
-      <script type="text/javascript">
-        window.livewire.on('postStore', () => {
-            $('#exampleModal').modal('hide');
-        });
-    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+
 </body>
 
 </html>
