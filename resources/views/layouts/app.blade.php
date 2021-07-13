@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/bundles/izitoast/css/iziToast.min.css') }}">
-   
+
     <!-- Template CSS -->
     <link rel='shortcut icon' type='image/x-icon' href='aegis/source/light/assets/img/favicon.ico'>
 
@@ -39,51 +39,58 @@
                     </ul>
                 </div>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><i data-feather="bell"></i>
-                        <span class="badge headerBadge2">
-                          3 </span> </a>
-                      <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-                        <div class="dropdown-header">
-                          Notifications
-                          <div class="float-right">
-                            <a href="#">Mark All As Read</a>
-                          </div>
-                        </div>
-                        <div class="dropdown-list-content dropdown-list-icons">
-                          <a href="#" class="dropdown-item dropdown-item-unread"> <span class="dropdown-item-icon bg-primary text-white"> <i class="fas
+                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+                            class="nav-link notification-toggle nav-link-lg"><i data-feather="bell"></i>
+                            <span class="badge headerBadge2">
+                                3 </span> </a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
+                            <div class="dropdown-header">
+                                Notifications
+                                <div class="float-right">
+                                    <a href="#">Mark All As Read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-list-content dropdown-list-icons">
+                                <a href="#" class="dropdown-item dropdown-item-unread"> <span
+                                        class="dropdown-item-icon bg-primary text-white"> <i class="fas
                                                           fa-code"></i>
-                            </span> <span class="dropdown-item-desc"> Template update is
-                              available now! <span class="time">2 Min
-                                Ago</span>
-                            </span>
-                          </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="far
+                                    </span> <span class="dropdown-item-desc"> Template update is
+                                        available now! <span class="time">2 Min
+                                            Ago</span>
+                                    </span>
+                                </a> <a href="#" class="dropdown-item"> <span
+                                        class="dropdown-item-icon bg-info text-white"> <i class="far
                                                           fa-user"></i>
-                            </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
-                                Sugiharto</b> are now friends <span class="time">10 Hours
-                                Ago</span>
-                            </span>
-                          </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-success text-white"> <i class="fas
+                                    </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
+                                            Sugiharto</b> are now friends <span class="time">10 Hours
+                                            Ago</span>
+                                    </span>
+                                </a> <a href="#" class="dropdown-item"> <span
+                                        class="dropdown-item-icon bg-success text-white"> <i class="fas
                                                           fa-check"></i>
-                            </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
-                              moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
-                                Hours
-                                Ago</span>
-                            </span>
-                          </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-exclamation-triangle"></i>
-                            </span> <span class="dropdown-item-desc"> Low disk space. Let's
-                              clean it! <span class="time">17 Hours Ago</span>
-                            </span>
-                          </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
+                                    </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
+                                        moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
+                                            Hours
+                                            Ago</span>
+                                    </span>
+                                </a> <a href="#" class="dropdown-item"> <span
+                                        class="dropdown-item-icon bg-danger text-white"> <i
+                                            class="fas fa-exclamation-triangle"></i>
+                                    </span> <span class="dropdown-item-desc"> Low disk space. Let's
+                                        clean it! <span class="time">17 Hours Ago</span>
+                                    </span>
+                                </a> <a href="#" class="dropdown-item"> <span
+                                        class="dropdown-item-icon bg-info text-white"> <i class="fas
                                                           fa-bell"></i>
-                            </span> <span class="dropdown-item-desc"> Welcome to Aegis
-                              template! <span class="time">Yesterday</span>
-                            </span>
-                          </a>
+                                    </span> <span class="dropdown-item-desc"> Welcome to Aegis
+                                        template! <span class="time">Yesterday</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer text-center">
+                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                            </div>
                         </div>
-                        <div class="dropdown-footer text-center">
-                          <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                        </div>
-                      </div>
                     </li>
                     @guest
                         <li class="nav-item">
@@ -98,10 +105,13 @@
                             <div class="dropdown-menu dropdown-menu-right pullDown">
                                 <div class="dropdown-title"> {{ Auth::user()->name }}</div>
                                 <div class="dropdown-divider">{{ Auth::user()->roles[0]->name }}</div>
+                                <a href="{{ url('/admin/mi-perfil') }}" class="dropdown-item has-icon"> <i class="far
+                                    fa-user"></i> Perfil
+                                  </a>
                                 <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();"> <i
+                                                                     document.getElementById('logout-form').submit();"> <i
                                         class="fas fa-sign-out-alt"></i>
-                                    {{ __('Logout') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -139,7 +149,8 @@
                                         data-feather="monitor"></i><span>Administración
                                     </span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="active"><a class="nav-link" href="{{ url('/admin/control-permisos') }}">Control de Roles</a></li>
+                                    <li class="active"><a class="nav-link"
+                                            href="{{ url('/admin/control-permisos') }}">Control de Roles</a></li>
                                     <li class="active"><a class="nav-link"
                                             href="{{ url('/admin/lista-usuarios') }}">Lista de Usuarios</a></li>
                                     <li class="active"><a class="nav-link"
@@ -267,15 +278,15 @@
     <!-- General JS Scripts -->
     <script src="{{ asset('aegis/source/light/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('aegis/source/light/assets/js/scripts.js') }}"></script>
-        @livewireScripts
+    
+    @livewireScripts
     <!-- Evento de Modales -->
     <script src="{{ asset('js/eventos.js') }}"></script>
     <!-- Custom JS File -->
     <script src="{{ asset('aegis/source/light/assets/js/custom.js') }}"></script>
     <script src="{{ asset('aegis/source/light/assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   
+    <script src="{{ asset('aegis/source/light/assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 
 </body>
 

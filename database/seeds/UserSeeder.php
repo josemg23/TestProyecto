@@ -43,6 +43,7 @@ class UserSeeder extends Seeder
             'name'         => 'José Magallanes',
             'email'           => 'admin@admin.com',
             'password'        => Hash::make('12345678'),
+            'estado'          => 'activo',
             'created_at'      => now(),
             'updated_at'      => now()
         ]);
