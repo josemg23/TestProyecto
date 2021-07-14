@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('auth')->group(function(){
 
-    
+    Route::get('/', 'AdminController@Inicio')->name('admin.index');
     Route::get('/post-online', 'AdminController@index')->name('Post');
     Route::get('/control-permisos', 'AdminController@index3')->name('Control.Permisos');
     Route::get('/actividades-online', 'AdminController@index2')->name('Actividades');

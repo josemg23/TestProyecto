@@ -72,7 +72,14 @@
                                             @else
                                                 badge-danger @endif">{{ $c->estado }}</span>
                                         </td>
-                                        <td class="text-center " >{{"Ultimo Acceso "}}</td>
+                                        <td class="text-center " > 
+                                              @isset($c->access_at)
+                                                  {{Carbon\Carbon::parse($c->access_at)->diffForHumans()}}
+                                               @else 
+                                               Sin Ingreso
+                                              @endisset
+
+                                        </td>
                                         <td  width="10px">
                                             <button class="btn btn-success" data-toggle="modal"
                                                 data-target="#EditUsuario"

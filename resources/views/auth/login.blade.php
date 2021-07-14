@@ -30,33 +30,44 @@
                                 <h4>Login</h4>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('login') }}" class="needs-validation"
-                                    novalidate="">
+                                @if (Session::has('message'))
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        {{ Session::get('message') }}
+                                    </div>
+                                @endif
+                                <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email" tabindex="1"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus="">
-                                        <div class="invalid-feedback">
-                                            Porfavor ingrese su email correctamente
-                                        </div>
+                                            @error('email') is-invalid @enderror" value="{{ old('email') }}" required
+                                            autocomplete="email" autofocus="">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
                                             <div class="float-right">
                                                 @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot Your Password?') }}
-                                                </a>
+                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                        {{ __('Forgot Your Password?') }}
+                                                    </a>
                                                 @endif
                                             </div>
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required="">
-                                        <div class="invalid-feedback">
-                                            please fill in your password
-                                        </div>
+                                        <input id="password" type="password" class="form-control" @error('password')
+                                            is-invalid @enderror" name="password" tabindex="2" required="">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
@@ -95,9 +106,3 @@
 <!-- Copied from http://radixtouch.in/templates/admin/aegis/source/light/auth-login.html by Cyotek WebCopy 1.7.0.600, Saturday, September 21, 2019, 2:51:57 AM -->
 
 </html>
-
-
-
-
-
-

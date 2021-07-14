@@ -9,6 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+    public function Inicio()
+    {
+        return view('admin.index');
+    }
+
+
+
     public function index()
     {
         return view('cruds.post.indice');
@@ -36,25 +50,4 @@ class AdminController extends Controller
     }
 
 
-    // public function GuardarFoto(Request $request){
-            
-    //     $user = User::find(Auth::user()->id);
-   
-    //     if ($request->hasFile('imagen')) {
-    //         if (isset($user->documento)) {
-    //             $image_path = public_path() . $user->documento->archivo;
-    //             unlink($image_path);
-    //         }
-    //         $archivo = $request->cotizacion;
-    //         $nombre       = time() . '_' . $archivo->getClientOriginalName();
-    //         $urldocumento = '/foto-perfil/' . $nombre;
-    //         $archivo->storeAs('foto-perfil',  $nombre, 'public_upload');
-    //         $documento    = new Document(['nombre' => $archivo->getClientOriginalName(), 'extension' => pathinfo($urldocumento, PATHINFO_EXTENSION), 'archivo' => $urldocumento]);
-    //         $user->documento()->save($documento);
-    //     }
-
-    //     return redirect()->route('/admin/mi-perfil');
-
-
-    // }
 }
