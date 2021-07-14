@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/bundles/izitoast/css/iziToast.min.css') }}">
 
     <!-- Template CSS -->
-    <link rel='shortcut icon' type='image/x-icon' href='aegis/source/light/assets/img/favicon.ico'>
+    <link rel='shortcut icon' type='image/x-icon' href="{{asset('aegis/source/light/assets/img/favicon.ico')}}">
 
     @yield('style')
 
@@ -150,7 +150,7 @@
                                     </span></a>
                                 <ul class="dropdown-menu">
                                     <li class="active"><a class="nav-link"
-                                            href="{{ url('/admin/control-permisos') }}">Control de Roles</a></li>
+                                            href="{{ url('/admin/control-permisos') }}">Lista de Roles</a></li>
                                     <li class="active"><a class="nav-link"
                                             href="{{ url('/admin/lista-usuarios') }}">Lista de Usuarios</a></li>
                                     <li class="active"><a class="nav-link"
@@ -162,7 +162,7 @@
 
                             <li class="dropdown">
                                 <a href="#" class="nav-link has-dropdown"><i
-                                        data-feather="command"></i><span>Perfil</span></a>
+                                        data-feather="command"></i><span>Servicios</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link"
                                             href="{{ url('/admin/actividades-online') }}">Actividades</a></li>

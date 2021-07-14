@@ -21,11 +21,11 @@ class UserSeeder extends Seeder
           //resetea el cache de roles y permisos antes de exportar
           app()[PermissionRegistrar::class]->forgetCachedPermissions();
           $role1 = Role::create(['name'  => 'super-admin']);
-          $role2 = Role::create(['name'  => 'blogger']);
-          $role3 = Role::create(['name'  => 'jefe' ]);
-          $role4 = Role::create(['name'  => 'director' ]);
-          $role5 = Role::create(['name'  => 'supervisor' ]);
-          $role6 = Role::create(['name'  => 'sub-director' ]);
+          $role2 = Role::create(['name'  => 'admin']);
+          $role3 = Role::create(['name'  => 'contador' ]);
+          $role4 = Role::create(['name'  => 'financiero' ]);
+          $role5 = Role::create(['name'  => 'marketing' ]);
+          $role6 = Role::create(['name'  => 'abogado' ]);
           $role7 = Role::create(['name'  => 'invitado' ]);
           $role8 = Role::create(['name'  => 'cliente' ]);
   
