@@ -21,7 +21,7 @@ class Publicaciones extends Component
     public $orderBy   = 'id';
     public $orderAsc  = true;
     public $post_id   = '';
-    public $estado    ='active';
+    public $estado    ='activo';
     
     public $editMode   = false;
     public $createMode = false;
@@ -29,7 +29,9 @@ class Publicaciones extends Component
 
     public $titulo, $resumen, $user_id='';
 
- 
+   public function mount(){
+    $this->estado    ='activo';
+   }
 
 
     public function render()
@@ -78,7 +80,7 @@ class Publicaciones extends Component
         $p->titulo   = $this->titulo;
         $p->user_id  = Auth::id();
         $p->resumen  = $this->resumen;
-        $p->estado   = $this->estado == 'activo' ? 'activo' : 'inactivo';
+        $p->estado    = $this->estado == 'activo' ? 'activo' : 'inactivo';
         $p->save();
         $this->resetInput();
         $this->emit('success',['mensaje'=> 'Publicación Creada con Exito', 'modal' => '#createPost'] );

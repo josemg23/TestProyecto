@@ -30,7 +30,9 @@ class Usuario extends Component
 
     public $name, $email ;
 
-
+    public function mount(){
+        $this->estado    ='activo';
+       }
        
     public function render()
     {   
