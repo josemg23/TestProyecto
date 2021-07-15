@@ -81,7 +81,7 @@
 
                                         </td>
                                         <td  width="10px">
-                                            <button class="btn btn-success" data-toggle="modal"
+                                            <button class="btn btn-warning" data-toggle="modal"
                                                 data-target="#EditUsuario"
                                                 wire:click.prevent="EditUser({{ $c->id }})">
                                                Editar

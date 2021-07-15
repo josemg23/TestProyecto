@@ -5,12 +5,17 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::get('/', 'AdminController@Inicio')->name('admin.index');
-    Route::get('/post-online', 'AdminController@index')->name('Post');
-    Route::get('/control-permisos', 'AdminController@index3')->name('Control.Permisos');
-    Route::get('/actividades-online', 'AdminController@index2')->name('Actividades');
-    Route::get('/lista-usuarios', 'AdminController@index4')->name('usuarios');
     Route::get('/mi-perfil', 'AdminController@perfil')->name('admin.perfil.me');
 
- 
+  Route::group(['middleware' => ['role_or_permission:super-admin|usuarios']], function(){
 
+    Route::get('/control-permisos', 'AdminController@index3')->name('admin.control.permisos');
+    Route::get('/lista-usuarios', 'AdminController@index4')->name('admin.usuario.index');
+
+  });
+ 
+    Route::get('/actividades-online', 'AdminController@index2')->name('admin.actividades');
+    Route::get('/post-online', 'AdminController@index')->name('admin.post');
+ 
+      
 });

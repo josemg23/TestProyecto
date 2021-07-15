@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <!-- Copied from http://radixtouch.in/templates/admin/aegis/source/light/index.html by Cyotek WebCopy 1.7.0.600, Saturday, September 21, 2019, 2:51:57 AM -->
 
 <head>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('aegis/source/light/assets/bundles/izitoast/css/iziToast.min.css') }}">
 
     <!-- Template CSS -->
-    <link rel='shortcut icon' type='image/x-icon' href="{{asset('aegis/source/light/assets/img/favicon.ico')}}">
+    <link rel='shortcut icon' type='image/x-icon' href="{{ asset('aegis/source/light/assets/img/favicon.ico') }}">
 
     @yield('style')
 
@@ -106,11 +106,12 @@
                                 <div class="dropdown-title"> {{ Auth::user()->name }}</div>
                                 <div class="dropdown-divider">{{ Auth::user()->roles[0]->name }}</div>
                                 <a href="{{ url('/admin/mi-perfil') }}" class="dropdown-item has-icon"> <i class="far
-                                    fa-user"></i> Perfil
-                                  </a>
-                                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();"> <i
-                                        class="fas fa-sign-out-alt"></i>
+                                            fa-user"></i> Perfil
+                                </a>
+                                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"
+                                    onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i>
                                     {{ __('Cerrar Sesión') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -142,36 +143,15 @@
                             <div class="user-name"> {{ Auth::user()->name }}</div>
                             <div class="user-role">{{ Auth::user()->roles[0]->name }}</div>
                         </div>
-                        <ul class="sidebar-menu">
-                            <li class="menu-header">Menu</li>
-                            <li class="dropdown active">
-                                <a href="#" class="nav-link has-dropdown"><i
-                                        data-feather="monitor"></i><span>Administración
-                                    </span></a>
-                                <ul class="dropdown-menu">
-                                    <li class="active"><a class="nav-link"
-                                            href="{{ url('/admin/control-permisos') }}">Lista de Roles</a></li>
-                                    <li class="active"><a class="nav-link"
-                                            href="{{ url('/admin/lista-usuarios') }}">Lista de Usuarios</a></li>
-                                    <li class="active"><a class="nav-link"
-                                            href="{{ url('/admin/post-online') }}">Lista de Post</a></li>
-                                    <li><a class="nav-link" href="{{ url('/productos') }}">Productos</a></li>
-
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="nav-link has-dropdown"><i
-                                        data-feather="command"></i><span>Servicios</span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link"
-                                            href="{{ url('/admin/actividades-online') }}">Actividades</a></li>
-                                    <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
-                                    <li><a class="nav-link" href="blog.html">Blog</a></li>
-                                    <li><a class="nav-link" href="calendar.html">Calendar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">MENU</li>
+                     
+                        {{-- aqui MENU JSON --}}                   
+                            @foreach ($menuData[0]->menu as $menu)
+                            @include('layouts.panels.menuVertical',['menu' => $menu])
+                            @endforeach
+                    </ul>
                 </aside>
             </div>
             <!-- Main Content -->
@@ -278,7 +258,7 @@
     <!-- General JS Scripts -->
     <script src="{{ asset('aegis/source/light/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('aegis/source/light/assets/js/scripts.js') }}"></script>
-    
+
     @livewireScripts
     <!-- Evento de Modales -->
     <script src="{{ asset('js/eventos.js') }}"></script>
@@ -286,7 +266,8 @@
     <script src="{{ asset('aegis/source/light/assets/js/custom.js') }}"></script>
     <script src="{{ asset('aegis/source/light/assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('aegis/source/light/assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+    <script src="{{ asset('aegis/source/light/assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js') }}">
+    </script>
 
 </body>
 
